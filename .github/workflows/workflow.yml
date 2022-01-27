@@ -1,0 +1,40 @@
+name: Rancher Setup
+
+on:
+  push:
+    branches: 
+      master
+
+jobs:
+  terraform:
+    name: "Infra Provisioning"
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ID }}
+      PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
+      AWS_REGION: 'us-east-2'
+      
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1.2.1
+        
+      - name: Terraform Init
+        id: init
+        run: terraform init
+        
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan
+        continue-on-error: true
+        
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+        
+      - name: Terraform Apply
+        id: apply
+        if: github.event_name == 'push'
+        run: terraform apply -auto-approve
