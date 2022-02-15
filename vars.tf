@@ -48,4 +48,5 @@ variable "AWS_DEFAULT_OUTPUT" {
 
 variable "pass" {
     description = "bootstrap password"
+    default = "xyz"
 }
