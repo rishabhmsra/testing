@@ -20,15 +20,7 @@ resource "aws_instance" "ec2-instance" {
     Name = "${var.name}"
   }
   
-  variable "bootstrap_pass" {
-    value = pass
-  }
-  
-  output "bootstrap_pass_output" {
-    value = pass
-  }
-  
-  user_data = <<-EOF
+ user_data = <<-EOF
     #!/bin/bash
     set -x
     curl https://releases.rancher.com/install-docker/20.10.sh | sh
