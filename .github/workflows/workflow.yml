@@ -56,8 +56,6 @@ jobs:
       - name: Get outputs
         uses: dflook/terraform-output@v1
         id: tf-outputs
-        with:
-          path: my-terraform-config
 
       - name: Print pass
         run: |
