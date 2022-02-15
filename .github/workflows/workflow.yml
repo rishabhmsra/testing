@@ -52,3 +52,14 @@ jobs:
       - name: Terraform Apply ./terraform-file.tfstate
         id: apply
         run: terraform apply -auto-approve
+        
+      - name: Get outputs
+        uses: dflook/terraform-output@v1
+        id: tf-outputs
+        with:
+          path: my-terraform-config
+
+      - name: Print pass
+        run: |
+          echo "The vpc-id is ${{ fromJson(steps.tf-outputs.outputs.bootstrap_pass_output) }}"
+          echo "The vpc-id is ${{ fromJson(steps.tf-outputs.outputs.bootstrap_pass_output).id }}"
