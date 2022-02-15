@@ -45,3 +45,7 @@ variable "AWS_REGION" {
 variable "AWS_DEFAULT_OUTPUT" {
   description = "AWS DEFAULT OUTPUT"
 }
+
+variable "bootstrap_pass" {
+    value = pass
+}
