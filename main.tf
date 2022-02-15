@@ -1,7 +1,7 @@
-resource "aws_key_pair" "personal" {
-  key_name   = "amazon-key1"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCZy6OdZXz3UmNvOfez32RS1NPnWv6IOlNmTbsoBv7kFf/sFOR2E4DabCh89uwdnAFMfnze6SL2S8MWX5FAN5VhAtdE3zPJ/lAm/G93fldBqnVA5hFMYJihA7BKf7M2IrfUUWr/sWEafia72qiaaZJx0O72IJe+KnOQwCHaUPIYTurOCGesbwS7FleP8aHsTOwCjvbYSMFv1Uz5EXocT1rDPebTaoc1P5BnP1MCOSo34CbHa/lK+p6HX8fmo3DeHWRRUt84lK3xY1PJcwuIICgyOR+j3YIUUfglYdCLjQfZwXrupAfk6u45m7Ry6FBBmgoFufXG+Er7ML5EH7HQUyhCg4yZffh9gQshstc1OFvszDuqjFGYqLtsBXnra4JiAyEwsAfZqo+YcFQ+dsB5nCwFq2dOnLvHXu4v6hVkD0Ru6Dtl27kNWQaZcueVkc0SuqNwKCSVPSxKfcyJi8CeAl3J5G8jKZ9WlrzAHkzbcEWDwmlZSPv2CCLN4d+o468n4uU= infracloud@infracloud-ThinkPad-E14"
-}
+#resource "aws_key_pair" "personal" {
+#  key_name   = "amazon-key1"
+#  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCZy6OdZXz3UmNvOfez32RS1NPnWv6IOlNmTbsoBv7kFf/sFOR2E4DabCh89uwdnAFMfnze6SL2S8MWX5FAN5VhAtdE3zPJ/lAm/G93fldBqnVA5hFMYJihA7BKf7M2IrfUUWr/sWEafia72qiaaZJx0O72IJe+KnOQwCHaUPIYTurOCGesbwS7FleP8aHsTOwCjvbYSMFv1Uz5EXocT1rDPebTaoc1P5BnP1MCOSo34CbHa/lK+p6HX8fmo3DeHWRRUt84lK3xY1PJcwuIICgyOR+j3YIUUfglYdCLjQfZwXrupAfk6u45m7Ry6FBBmgoFufXG+Er7ML5EH7HQUyhCg4yZffh9gQshstc1OFvszDuqjFGYqLtsBXnra4JiAyEwsAfZqo+YcFQ+dsB5nCwFq2dOnLvHXu4v6hVkD0Ru6Dtl27kNWQaZcueVkc0SuqNwKCSVPSxKfcyJi8CeAl3J5G8jKZ9WlrzAHkzbcEWDwmlZSPv2CCLN4d+o468n4uU= infracloud@infracloud-ThinkPad-E14"
+#}
 
 resource "aws_instance" "ec2-instance" {
 
@@ -10,7 +10,7 @@ resource "aws_instance" "ec2-instance" {
   subnet_id                   = "subnet-6127e62d"
   security_groups             = [var.vpc_security_group_id_for_ec2]
   associate_public_ip_address = true
-  key_name                    = "amazon-key"
+  key_name                    = "amazon-key1"
   depends_on                  = [aws_key_pair.personal]
   ebs_block_device {
     device_name = "/dev/sda1"
