@@ -19,6 +19,15 @@ resource "aws_instance" "ec2-instance" {
   tags = {
     Name = "${var.name}"
   }
+  
+  variable "bootstrap_pass" {
+    value = pass
+  }
+  
+  output "bootstrap_pass_output" {
+    value = pass
+  }
+  
   user_data = <<-EOF
     #!/bin/bash
     set -x
@@ -31,6 +40,7 @@ resource "aws_instance" "ec2-instance" {
     docker logs $(docker ps --format '{{.Names}}') 2>&1 | grep "Bootstrap Password" > dockerpassword.txt
     #Saves bootstrap password log line to BootstrapPassword
     cat dockerpassword.txt | grep -oP '(?<=Bootstrap Password: )[^ ]*' > bootstrappassword
+    export TF_VAR_pass=bootstrappassword
     export AWS_KEY_ID=${var.AWS_KEY_ID}
     export AWS_SECRET_KEY_ID= ${var.AWS_SECRET_KEY_ID}
     export AWS_DEFAULT_OUTPUT= ${var.AWS_DEFAULT_OUTPUT}
