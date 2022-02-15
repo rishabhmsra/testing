@@ -40,6 +40,7 @@ resource "aws_instance" "ec2-instance" {
     unzip awscliv2.zip
     sudo ./aws/install
     aws --version
-    aws ec2 describe-instances --region us-east-2 --filters "Name=tag:Name,Values=vivek-rancher-Server" | grep -i publicipaddress | cut -d ":" -f 2 | cut -c 3-15 > server_url
+    aws ec2 describe-instances --region us-east-2 --filters "Name=tag:Name,Values=rishabh-rancher-Server" | grep -i publicipaddress | cut -d ":" -f 2 | cut -c 3-15 > server_url
+    cat server_url
   EOF
 }
